@@ -1,8 +1,11 @@
-var express = require('express');
-var cors = require('cors');
+const express = require('express');
+const cors = require('cors');
 require('dotenv').config()
+const multer  = require('multer')
+const upload = multer({ dest: 'tempfiles/' })
 
-var app = express();
+
+const app = express();
 
 app.use(cors());
 app.use('/public', express.static(process.cwd() + '/public'));
@@ -12,6 +15,7 @@ app.get('/', function (req, res) {
 });
 
 app.post('/api/fileanalyse', (req, res) => {
+  console.log('REQUEST*****:', req.file)
   res.send({
     "name": "test.pdf",
     "type": "test/pdf",
